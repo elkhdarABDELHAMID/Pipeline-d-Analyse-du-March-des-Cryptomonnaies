@@ -51,7 +51,7 @@ def load_to_hbase(**context):
     execution_date = context['ds']
     year, month, day = execution_date.split('-')
     hdfs_dir = f"/user/etudiant/crypto/processed/YYYY={year}/MM={month}/DD={day}/"
-    local_file = "/home/airflow/tmp/crypto_agg.csv"  # مسار جديد
+    local_file = "/home/airflow/tmp/crypto_agg.csv" 
 
     os.makedirs(os.path.dirname(local_file), exist_ok=True)
 
