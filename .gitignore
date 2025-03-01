@@ -1,0 +1,9 @@
+airflow/logs/
+airflow/scheduler/
+*.pid
+*.log
+scripts/hsperfdata_root/
+scripts/hadoop-root-namenode.pid
+__pycache__/
+*.pyc
+*.csv  # إذا ما بغيتيش تضيفي crypto_agg.csv (يمكنك تغيير هادشي إذا ضروري)

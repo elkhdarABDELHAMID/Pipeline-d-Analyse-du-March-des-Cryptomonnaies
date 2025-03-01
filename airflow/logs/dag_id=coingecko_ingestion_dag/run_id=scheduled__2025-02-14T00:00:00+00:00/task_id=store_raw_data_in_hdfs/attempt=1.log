@@ -1,0 +1,44 @@
+[2025-02-24T17:25:41.361+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-02-14T00:00:00+00:00 [queued]>
+[2025-02-24T17:25:41.378+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-02-14T00:00:00+00:00 [queued]>
+[2025-02-24T17:25:41.379+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-24T17:25:41.398+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): store_raw_data_in_hdfs> on 2025-02-14 00:00:00+00:00
+[2025-02-24T17:25:41.406+0000] {standard_task_runner.py:57} INFO - Started process 907 to run task
+[2025-02-24T17:25:41.410+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'coingecko_ingestion_dag', 'store_raw_data_in_hdfs', 'scheduled__2025-02-14T00:00:00+00:00', '--job-id', '126', '--raw', '--subdir', 'DAGS_FOLDER/test.py', '--cfg-path', '/tmp/tmp4job0va_']
+[2025-02-24T17:25:41.414+0000] {standard_task_runner.py:85} INFO - Job 126: Subtask store_raw_data_in_hdfs
+[2025-02-24T17:25:41.468+0000] {task_command.py:415} INFO - Running <TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-02-14T00:00:00+00:00 [running]> on host 85b967fd3989
+[2025-02-24T17:25:41.546+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='coingecko_ingestion_dag' AIRFLOW_CTX_TASK_ID='store_raw_data_in_hdfs' AIRFLOW_CTX_EXECUTION_DATE='2025-02-14T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-14T00:00:00+00:00'
+[2025-02-24T17:25:41.558+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/test.py", line 38, in store_raw_data_in_hdfs
+    with open(local_file, 'w') as f:
+PermissionError: [Errno 13] Permission denied: '/mnt/hadoop_data/coingecko_raw.json'
+[2025-02-24T17:25:41.569+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=coingecko_ingestion_dag, task_id=store_raw_data_in_hdfs, execution_date=20250214T000000, start_date=20250224T172541, end_date=20250224T172541
+[2025-02-24T17:25:41.585+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 126 for task store_raw_data_in_hdfs ([Errno 13] Permission denied: '/mnt/hadoop_data/coingecko_raw.json'; 907)
+[2025-02-24T17:25:41.634+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-24T17:25:41.659+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-02-25T15:59:28.210+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-02-14T00:00:00+00:00 [queued]>
+[2025-02-25T15:59:28.227+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-02-14T00:00:00+00:00 [queued]>
+[2025-02-25T15:59:28.228+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-25T15:59:28.248+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): store_raw_data_in_hdfs> on 2025-02-14 00:00:00+00:00
+[2025-02-25T15:59:28.256+0000] {standard_task_runner.py:57} INFO - Started process 549 to run task
+[2025-02-25T15:59:28.261+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'coingecko_ingestion_dag', 'store_raw_data_in_hdfs', 'scheduled__2025-02-14T00:00:00+00:00', '--job-id', '124', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmpoynprm8v']
+[2025-02-25T15:59:28.269+0000] {standard_task_runner.py:85} INFO - Job 124: Subtask store_raw_data_in_hdfs
+[2025-02-25T15:59:28.329+0000] {task_command.py:415} INFO - Running <TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-02-14T00:00:00+00:00 [running]> on host af9744bbb9eb
+[2025-02-25T15:59:28.425+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='coingecko_ingestion_dag' AIRFLOW_CTX_TASK_ID='store_raw_data_in_hdfs' AIRFLOW_CTX_EXECUTION_DATE='2025-02-14T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-14T00:00:00+00:00'
+[2025-02-25T15:59:28.442+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/pipeline.py", line 39, in store_raw_data_in_hdfs
+    with open(local_file, 'w') as f:
+PermissionError: [Errno 13] Permission denied: '/mnt/hadoop_data/coingecko_raw.json'
+[2025-02-25T15:59:28.452+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=coingecko_ingestion_dag, task_id=store_raw_data_in_hdfs, execution_date=20250214T000000, start_date=20250225T155928, end_date=20250225T155928
+[2025-02-25T15:59:28.466+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 124 for task store_raw_data_in_hdfs ([Errno 13] Permission denied: '/mnt/hadoop_data/coingecko_raw.json'; 549)
+[2025-02-25T15:59:28.486+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-25T15:59:28.517+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

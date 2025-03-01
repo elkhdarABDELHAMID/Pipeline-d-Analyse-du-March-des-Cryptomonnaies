@@ -1,0 +1,26 @@
+[2025-02-24T17:20:28.857+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.fetch_data scheduled__2025-01-31T00:00:00+00:00 [queued]>
+[2025-02-24T17:20:28.876+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.fetch_data scheduled__2025-01-31T00:00:00+00:00 [queued]>
+[2025-02-24T17:20:28.880+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-24T17:20:29.018+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): fetch_data> on 2025-01-31 00:00:00+00:00
+[2025-02-24T17:20:29.038+0000] {standard_task_runner.py:57} INFO - Started process 703 to run task
+[2025-02-24T17:20:29.038+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'coingecko_ingestion_dag', 'fetch_data', 'scheduled__2025-01-31T00:00:00+00:00', '--job-id', '72', '--raw', '--subdir', 'DAGS_FOLDER/test.py', '--cfg-path', '/tmp/tmp_66krbs4']
+[2025-02-24T17:20:29.047+0000] {standard_task_runner.py:85} INFO - Job 72: Subtask fetch_data
+[2025-02-24T17:20:29.186+0000] {task_command.py:415} INFO - Running <TaskInstance: coingecko_ingestion_dag.fetch_data scheduled__2025-01-31T00:00:00+00:00 [running]> on host 85b967fd3989
+[2025-02-24T17:20:29.341+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='coingecko_ingestion_dag' AIRFLOW_CTX_TASK_ID='fetch_data' AIRFLOW_CTX_EXECUTION_DATE='2025-01-31T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-31T00:00:00+00:00'
+[2025-02-24T17:20:29.522+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-02-24T17:20:29.544+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=coingecko_ingestion_dag, task_id=fetch_data, execution_date=20250131T000000, start_date=20250224T172028, end_date=20250224T172029
+[2025-02-24T17:20:29.601+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-24T17:20:29.639+0000] {taskinstance.py:2784} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-02-25T15:57:49.217+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.fetch_data scheduled__2025-01-31T00:00:00+00:00 [queued]>
+[2025-02-25T15:57:49.228+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.fetch_data scheduled__2025-01-31T00:00:00+00:00 [queued]>
+[2025-02-25T15:57:49.228+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-25T15:57:49.241+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): fetch_data> on 2025-01-31 00:00:00+00:00
+[2025-02-25T15:57:49.245+0000] {standard_task_runner.py:57} INFO - Started process 445 to run task
+[2025-02-25T15:57:49.248+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'coingecko_ingestion_dag', 'fetch_data', 'scheduled__2025-01-31T00:00:00+00:00', '--job-id', '81', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmpi2iwvotx']
+[2025-02-25T15:57:49.251+0000] {standard_task_runner.py:85} INFO - Job 81: Subtask fetch_data
+[2025-02-25T15:57:49.296+0000] {task_command.py:415} INFO - Running <TaskInstance: coingecko_ingestion_dag.fetch_data scheduled__2025-01-31T00:00:00+00:00 [running]> on host af9744bbb9eb
+[2025-02-25T15:57:49.365+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='coingecko_ingestion_dag' AIRFLOW_CTX_TASK_ID='fetch_data' AIRFLOW_CTX_EXECUTION_DATE='2025-01-31T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-31T00:00:00+00:00'
+[2025-02-25T15:57:49.993+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-02-25T15:57:50.002+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=coingecko_ingestion_dag, task_id=fetch_data, execution_date=20250131T000000, start_date=20250225T155749, end_date=20250225T155750
+[2025-02-25T15:57:50.043+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-25T15:57:50.063+0000] {taskinstance.py:2784} INFO - 1 downstream tasks scheduled from follow-on schedule check

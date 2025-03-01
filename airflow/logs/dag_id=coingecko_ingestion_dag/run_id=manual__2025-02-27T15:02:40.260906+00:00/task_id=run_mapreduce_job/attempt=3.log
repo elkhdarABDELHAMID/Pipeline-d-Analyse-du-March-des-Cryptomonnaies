@@ -1,0 +1,29 @@
+[2025-02-27T15:12:57.664+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.run_mapreduce_job manual__2025-02-27T15:02:40.260906+00:00 [queued]>
+[2025-02-27T15:12:57.673+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.run_mapreduce_job manual__2025-02-27T15:02:40.260906+00:00 [queued]>
+[2025-02-27T15:12:57.673+0000] {taskinstance.py:1361} INFO - Starting attempt 3 of 4
+[2025-02-27T15:12:57.685+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): run_mapreduce_job> on 2025-02-27 15:02:40.260906+00:00
+[2025-02-27T15:12:57.690+0000] {standard_task_runner.py:57} INFO - Started process 392 to run task
+[2025-02-27T15:12:57.693+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'coingecko_ingestion_dag', 'run_mapreduce_job', 'manual__2025-02-27T15:02:40.260906+00:00', '--job-id', '348', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmp2c46iuuw']
+[2025-02-27T15:12:57.696+0000] {standard_task_runner.py:85} INFO - Job 348: Subtask run_mapreduce_job
+[2025-02-27T15:12:57.733+0000] {task_command.py:415} INFO - Running <TaskInstance: coingecko_ingestion_dag.run_mapreduce_job manual__2025-02-27T15:02:40.260906+00:00 [running]> on host d3f9e45e912b
+[2025-02-27T15:12:57.775+0000] {logging_mixin.py:151} WARNING - /home/***/.local/lib/python3.8/site-packages/***/utils/context.py:206 AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+[2025-02-27T15:12:57.798+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='coingecko_ingestion_dag' AIRFLOW_CTX_TASK_ID='run_mapreduce_job' AIRFLOW_CTX_EXECUTION_DATE='2025-02-27T15:02:40.260906+00:00' AIRFLOW_CTX_TRY_NUMBER='3' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-27T15:02:40.260906+00:00'
+[2025-02-27T15:12:57.800+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-27T15:12:57.801+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', '\n        docker exec -i namenode         hadoop jar /opt/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar         -input /user/etudiant/crypto/raw/YYYY=2025/MM=02/DD=27/coingecko_raw.json         -output /user/etudiant/crypto/processed/YYYY=2025/MM=02/DD=27         -mapper "python3 /tmp/mapper.py"         -reducer "python3 /tmp/reducer.py"\n        ']
+[2025-02-27T15:12:57.808+0000] {subprocess.py:86} INFO - Output:
+[2025-02-27T15:12:59.077+0000] {subprocess.py:93} INFO - 2025-02-27 15:12:59,076 INFO impl.MetricsConfig: Loaded properties from hadoop-metrics2.properties
+[2025-02-27T15:12:59.115+0000] {subprocess.py:93} INFO - 2025-02-27 15:12:59,115 INFO impl.MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+[2025-02-27T15:12:59.116+0000] {subprocess.py:93} INFO - 2025-02-27 15:12:59,115 INFO impl.MetricsSystemImpl: JobTracker metrics system started
+[2025-02-27T15:12:59.125+0000] {subprocess.py:93} INFO - 2025-02-27 15:12:59,124 WARN impl.MetricsSystemImpl: JobTracker metrics system already initialized!
+[2025-02-27T15:12:59.223+0000] {subprocess.py:93} INFO - 2025-02-27 15:12:59,223 ERROR streaming.StreamJob: Error Launching job : Output directory hdfs://namenode:9000/user/etudiant/crypto/processed/YYYY=2025/MM=02/DD=27 already exists
+[2025-02-27T15:12:59.224+0000] {subprocess.py:93} INFO - Streaming Command Failed!
+[2025-02-27T15:12:59.716+0000] {subprocess.py:97} INFO - Command exited with return code 5
+[2025-02-27T15:12:59.725+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 5.
+[2025-02-27T15:12:59.729+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=coingecko_ingestion_dag, task_id=run_mapreduce_job, execution_date=20250227T150240, start_date=20250227T151257, end_date=20250227T151259
+[2025-02-27T15:12:59.740+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 348 for task run_mapreduce_job (Bash command failed. The command returned a non-zero exit code 5.; 392)
+[2025-02-27T15:12:59.761+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-27T15:12:59.776+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

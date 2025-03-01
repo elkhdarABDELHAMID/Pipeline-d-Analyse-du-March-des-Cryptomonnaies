@@ -1,0 +1,25 @@
+[2025-02-27T21:10:08.432+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.run_mapreduce_job manual__2025-02-27T21:09:57.462541+00:00 [queued]>
+[2025-02-27T21:10:08.444+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.run_mapreduce_job manual__2025-02-27T21:09:57.462541+00:00 [queued]>
+[2025-02-27T21:10:08.445+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 4
+[2025-02-27T21:10:08.463+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): run_mapreduce_job> on 2025-02-27 21:09:57.462541+00:00
+[2025-02-27T21:10:08.469+0000] {standard_task_runner.py:57} INFO - Started process 1296 to run task
+[2025-02-27T21:10:08.473+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'coingecko_ingestion_dag', 'run_mapreduce_job', 'manual__2025-02-27T21:09:57.462541+00:00', '--job-id', '495', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmph0t_6y87']
+[2025-02-27T21:10:08.476+0000] {standard_task_runner.py:85} INFO - Job 495: Subtask run_mapreduce_job
+[2025-02-27T21:10:08.558+0000] {task_command.py:415} INFO - Running <TaskInstance: coingecko_ingestion_dag.run_mapreduce_job manual__2025-02-27T21:09:57.462541+00:00 [running]> on host b86b19d2f863
+[2025-02-27T21:10:08.658+0000] {logging_mixin.py:151} WARNING - /home/***/.local/lib/python3.8/site-packages/***/utils/context.py:206 AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+[2025-02-27T21:10:08.715+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='coingecko_ingestion_dag' AIRFLOW_CTX_TASK_ID='run_mapreduce_job' AIRFLOW_CTX_EXECUTION_DATE='2025-02-27T21:09:57.462541+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-27T21:09:57.462541+00:00'
+[2025-02-27T21:10:08.719+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-27T21:10:08.721+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', '\n        # نفحصو إذا المجلد موجود ونمسحوه إذا كان موجود\n        OUTPUT_DIR="/user/etudiant/crypto/processed/YYYY=2025/MM=02/DD=27"\n        docker exec -i namenode bash -c "hdfs dfs -test -d $OUTPUT_DIR && hdfs dfs -rm -r $OUTPUT_DIR || echo \'Directory does not exist, proceeding...\'"\n\n        # نشغلو MapReduce\n        docker exec -i namenode         hadoop jar /opt/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar         -input /user/etudiant/crypto/raw/YYYY=2025/MM=02/DD=27/coingecko_raw.json         -output $OUTPUT_DIR         -mapper "python3 /tmp/mapper.py"         -reducer "python3 /tmp/reducer.py" 2>/tmp/mapreduce.log\n\n        # نفحصو إذا المخرجات تكتبات بنجاح\n        docker exec -i namenode hdfs dfs -test -e $OUTPUT_DIR/part-00000 || (echo "MapReduce failed to produce output. Check /tmp/mapreduce.log for details" && exit 1)\n        ']
+[2025-02-27T21:10:08.758+0000] {subprocess.py:86} INFO - Output:
+[2025-02-27T21:10:12.090+0000] {subprocess.py:93} INFO - Deleted /user/etudiant/crypto/processed/YYYY=2025/MM=02/DD=27
+[2025-02-27T21:10:20.420+0000] {subprocess.py:93} INFO - MapReduce failed to produce output. Check /tmp/mapreduce.log for details
+[2025-02-27T21:10:20.422+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-02-27T21:10:20.456+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-02-27T21:10:20.471+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=coingecko_ingestion_dag, task_id=run_mapreduce_job, execution_date=20250227T210957, start_date=20250227T211008, end_date=20250227T211020
+[2025-02-27T21:10:20.511+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 495 for task run_mapreduce_job (Bash command failed. The command returned a non-zero exit code 1.; 1296)
+[2025-02-27T21:10:20.565+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-27T21:10:20.800+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

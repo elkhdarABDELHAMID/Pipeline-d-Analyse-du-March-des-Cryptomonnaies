@@ -1,0 +1,24 @@
+[2025-02-26T11:00:14.094+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.run_mapreduce_job manual__2025-02-26T10:49:51.246352+00:00 [queued]>
+[2025-02-26T11:00:14.124+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.run_mapreduce_job manual__2025-02-26T10:49:51.246352+00:00 [queued]>
+[2025-02-26T11:00:14.130+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 2
+[2025-02-26T11:00:14.162+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): run_mapreduce_job> on 2025-02-26 10:49:51.246352+00:00
+[2025-02-26T11:00:14.166+0000] {standard_task_runner.py:57} INFO - Started process 172 to run task
+[2025-02-26T11:00:14.170+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'coingecko_ingestion_dag', 'run_mapreduce_job', 'manual__2025-02-26T10:49:51.246352+00:00', '--job-id', '251', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmpvivfs4ks']
+[2025-02-26T11:00:14.173+0000] {standard_task_runner.py:85} INFO - Job 251: Subtask run_mapreduce_job
+[2025-02-26T11:00:14.217+0000] {task_command.py:415} INFO - Running <TaskInstance: coingecko_ingestion_dag.run_mapreduce_job manual__2025-02-26T10:49:51.246352+00:00 [running]> on host 96a82263884e
+[2025-02-26T11:00:14.308+0000] {logging_mixin.py:151} WARNING - /home/***/.local/lib/python3.8/site-packages/***/utils/context.py:206 AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+[2025-02-26T11:00:14.377+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='coingecko_ingestion_dag' AIRFLOW_CTX_TASK_ID='run_mapreduce_job' AIRFLOW_CTX_EXECUTION_DATE='2025-02-26T10:49:51.246352+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-26T10:49:51.246352+00:00'
+[2025-02-26T11:00:14.380+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-26T11:00:14.381+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', '\n        docker exec -i namenode         hadoop jar /opt/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar           -input /user/etudiant/crypto/raw/YYYY=2025/MM=02/DD=26/coingecko_raw.json           -output /user/etudiant/crypto/processed/YYYY=2025/MM=02/DD=26           -mapper hdfs://namenode:9000/user/etudiant/scripts/mapper.py           -reducer hdfs://namenode:9000/user/etudiant/scripts/reducer.py           -file hdfs://namenode:9000/user/etudiant/scripts/mapper.py           -file hdfs://namenode:9000/user/etudiant/scripts/reducer.py\n        ']
+[2025-02-26T11:00:14.398+0000] {subprocess.py:86} INFO - Output:
+[2025-02-26T11:00:14.495+0000] {subprocess.py:93} INFO - Error response from daemon: container 9a78b135a91826480d328fadcf359d882e429aa6c03c57a2febd1917683190d0 is not running
+[2025-02-26T11:00:14.498+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-02-26T11:00:14.509+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-02-26T11:00:14.513+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=coingecko_ingestion_dag, task_id=run_mapreduce_job, execution_date=20250226T104951, start_date=20250226T110014, end_date=20250226T110014
+[2025-02-26T11:00:14.529+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 251 for task run_mapreduce_job (Bash command failed. The command returned a non-zero exit code 1.; 172)
+[2025-02-26T11:00:14.554+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-26T11:00:14.574+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

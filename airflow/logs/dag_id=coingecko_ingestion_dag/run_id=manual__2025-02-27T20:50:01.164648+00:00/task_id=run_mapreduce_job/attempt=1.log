@@ -1,0 +1,224 @@
+[2025-02-27T20:50:11.574+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.run_mapreduce_job manual__2025-02-27T20:50:01.164648+00:00 [queued]>
+[2025-02-27T20:50:11.591+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.run_mapreduce_job manual__2025-02-27T20:50:01.164648+00:00 [queued]>
+[2025-02-27T20:50:11.593+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 4
+[2025-02-27T20:50:11.620+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): run_mapreduce_job> on 2025-02-27 20:50:01.164648+00:00
+[2025-02-27T20:50:11.627+0000] {standard_task_runner.py:57} INFO - Started process 220 to run task
+[2025-02-27T20:50:11.635+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'coingecko_ingestion_dag', 'run_mapreduce_job', 'manual__2025-02-27T20:50:01.164648+00:00', '--job-id', '439', '--raw', '--subdir', 'DAGS_FOLDER/pipeline.py', '--cfg-path', '/tmp/tmpo9hvc1d4']
+[2025-02-27T20:50:11.640+0000] {standard_task_runner.py:85} INFO - Job 439: Subtask run_mapreduce_job
+[2025-02-27T20:50:11.704+0000] {task_command.py:415} INFO - Running <TaskInstance: coingecko_ingestion_dag.run_mapreduce_job manual__2025-02-27T20:50:01.164648+00:00 [running]> on host b86b19d2f863
+[2025-02-27T20:50:11.783+0000] {logging_mixin.py:151} WARNING - /home/***/.local/lib/python3.8/site-packages/***/utils/context.py:206 AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+[2025-02-27T20:50:11.830+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='coingecko_ingestion_dag' AIRFLOW_CTX_TASK_ID='run_mapreduce_job' AIRFLOW_CTX_EXECUTION_DATE='2025-02-27T20:50:01.164648+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-27T20:50:01.164648+00:00'
+[2025-02-27T20:50:11.835+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-27T20:50:11.836+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', '\n        # نفحصو إذا المجلد موجود ونمسحوه إذا كان موجود\n        OUTPUT_DIR="/user/etudiant/crypto/processed/YYYY=2025/MM=02/DD=27"\n        docker exec -i namenode bash -c "hdfs dfs -test -d $OUTPUT_DIR && hdfs dfs -rm -r $OUTPUT_DIR || echo \'Directory does not exist, proceeding...\'"\n\n        # نشغلو MapReduce\n        docker exec -i namenode         hadoop jar /opt/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar         -input /user/etudiant/crypto/raw/YYYY=2025/MM=02/DD=27/coingecko_raw.json         -output $OUTPUT_DIR         -mapper "python3 /tmp/mapper.py"         -reducer "python3 /tmp/reducer.py"\n\n        # نفحصو إذا المخرجات تكتبات بنجاح\n        docker exec -i namenode hdfs dfs -test -e $OUTPUT_DIR/part-00000 || (echo "MapReduce failed to produce output" && exit 1)\n        ']
+[2025-02-27T20:50:11.855+0000] {subprocess.py:86} INFO - Output:
+[2025-02-27T20:50:15.213+0000] {subprocess.py:93} INFO - Deleted /user/etudiant/crypto/processed/YYYY=2025/MM=02/DD=27
+[2025-02-27T20:50:17.257+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:17,256 INFO impl.MetricsConfig: Loaded properties from hadoop-metrics2.properties
+[2025-02-27T20:50:17.317+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:17,316 INFO impl.MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+[2025-02-27T20:50:17.318+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:17,316 INFO impl.MetricsSystemImpl: JobTracker metrics system started
+[2025-02-27T20:50:17.331+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:17,331 WARN impl.MetricsSystemImpl: JobTracker metrics system already initialized!
+[2025-02-27T20:50:17.560+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:17,559 INFO mapred.FileInputFormat: Total input files to process : 1
+[2025-02-27T20:50:17.605+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:17,604 INFO mapreduce.JobSubmitter: number of splits:1
+[2025-02-27T20:50:17.718+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:17,717 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_local1128328515_0001
+[2025-02-27T20:50:17.718+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:17,717 INFO mapreduce.JobSubmitter: Executing with tokens: []
+[2025-02-27T20:50:17.809+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:17,808 INFO mapreduce.Job: The url to track the job: http://localhost:8080/
+[2025-02-27T20:50:17.810+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:17,809 INFO mapred.LocalJobRunner: OutputCommitter set in config null
+[2025-02-27T20:50:17.811+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:17,811 INFO mapreduce.Job: Running job: job_local1128328515_0001
+[2025-02-27T20:50:17.812+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:17,811 INFO mapred.LocalJobRunner: OutputCommitter is org.apache.hadoop.mapred.FileOutputCommitter
+[2025-02-27T20:50:17.816+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:17,816 INFO output.FileOutputCommitter: File Output Committer Algorithm version is 2
+[2025-02-27T20:50:17.817+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:17,816 INFO output.FileOutputCommitter: FileOutputCommitter skip cleanup _temporary folders under output directory:false, ignore cleanup failures: false
+[2025-02-27T20:50:17.843+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:17,842 INFO mapred.LocalJobRunner: Waiting for map tasks
+[2025-02-27T20:50:17.845+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:17,845 INFO mapred.LocalJobRunner: Starting task: attempt_local1128328515_0001_m_000000_0
+[2025-02-27T20:50:17.861+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:17,860 INFO output.FileOutputCommitter: File Output Committer Algorithm version is 2
+[2025-02-27T20:50:17.861+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:17,860 INFO output.FileOutputCommitter: FileOutputCommitter skip cleanup _temporary folders under output directory:false, ignore cleanup failures: false
+[2025-02-27T20:50:17.877+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:17,876 INFO mapred.Task:  Using ResourceCalculatorProcessTree : [ ]
+[2025-02-27T20:50:17.885+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:17,884 INFO mapred.MapTask: Processing split: hdfs://namenode:9000/user/etudiant/crypto/raw/YYYY=2025/MM=02/DD=27/coingecko_raw.json:0+85156
+[2025-02-27T20:50:17.915+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:17,912 INFO mapred.MapTask: numReduceTasks: 1
+[2025-02-27T20:50:18.018+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,014 INFO mapred.MapTask: (EQUATOR) 0 kvi 26214396(104857584)
+[2025-02-27T20:50:18.021+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,015 INFO mapred.MapTask: mapreduce.task.io.sort.mb: 100
+[2025-02-27T20:50:18.025+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,015 INFO mapred.MapTask: soft limit at 83886080
+[2025-02-27T20:50:18.027+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,015 INFO mapred.MapTask: bufstart = 0; bufvoid = 104857600
+[2025-02-27T20:50:18.031+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,015 INFO mapred.MapTask: kvstart = 26214396; length = 6553600
+[2025-02-27T20:50:18.041+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,027 INFO mapred.MapTask: Map output collector class = org.apache.hadoop.mapred.MapTask$MapOutputBuffer
+[2025-02-27T20:50:18.068+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,060 INFO streaming.PipeMapRed: PipeMapRed exec [/usr/bin/python3, /tmp/mapper.py]
+[2025-02-27T20:50:18.098+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,083 INFO Configuration.deprecation: mapred.work.output.dir is deprecated. Instead, use mapreduce.task.output.dir
+[2025-02-27T20:50:18.109+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,086 INFO Configuration.deprecation: map.input.start is deprecated. Instead, use mapreduce.map.input.start
+[2025-02-27T20:50:18.117+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,087 INFO Configuration.deprecation: mapred.task.is.map is deprecated. Instead, use mapreduce.task.ismap
+[2025-02-27T20:50:18.125+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,087 INFO Configuration.deprecation: mapred.task.id is deprecated. Instead, use mapreduce.task.attempt.id
+[2025-02-27T20:50:18.128+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,088 INFO Configuration.deprecation: mapred.tip.id is deprecated. Instead, use mapreduce.task.id
+[2025-02-27T20:50:18.131+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,089 INFO Configuration.deprecation: mapred.local.dir is deprecated. Instead, use mapreduce.cluster.local.dir
+[2025-02-27T20:50:18.133+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,089 INFO Configuration.deprecation: map.input.file is deprecated. Instead, use mapreduce.map.input.file
+[2025-02-27T20:50:18.134+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,091 INFO Configuration.deprecation: mapred.skip.on is deprecated. Instead, use mapreduce.job.skiprecords
+[2025-02-27T20:50:18.135+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,092 INFO Configuration.deprecation: map.input.length is deprecated. Instead, use mapreduce.map.input.length
+[2025-02-27T20:50:18.135+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,093 INFO Configuration.deprecation: mapred.job.id is deprecated. Instead, use mapreduce.job.id
+[2025-02-27T20:50:18.137+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,098 INFO Configuration.deprecation: user.name is deprecated. Instead, use mapreduce.job.user.name
+[2025-02-27T20:50:18.139+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,099 INFO Configuration.deprecation: mapred.task.partition is deprecated. Instead, use mapreduce.task.partition
+[2025-02-27T20:50:18.155+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,154 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+[2025-02-27T20:50:18.237+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,236 INFO streaming.PipeMapRed: R/W/S=1/0/0 in:NA [rec/s] out:NA [rec/s]
+[2025-02-27T20:50:18.242+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,241 INFO streaming.PipeMapRed: Records R/W=1/1
+[2025-02-27T20:50:18.244+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,243 INFO streaming.PipeMapRed: MRErrorThread done
+[2025-02-27T20:50:18.245+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,243 INFO streaming.PipeMapRed: mapRedFinished
+[2025-02-27T20:50:18.246+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,246 INFO mapred.LocalJobRunner:
+[2025-02-27T20:50:18.247+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,246 INFO mapred.MapTask: Starting flush of map output
+[2025-02-27T20:50:18.247+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,246 INFO mapred.MapTask: Spilling map output
+[2025-02-27T20:50:18.248+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,246 INFO mapred.MapTask: bufstart = 0; bufend = 4755; bufvoid = 104857600
+[2025-02-27T20:50:18.248+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,246 INFO mapred.MapTask: kvstart = 26214396(104857584); kvend = 26214000(104856000); length = 397/6553600
+[2025-02-27T20:50:18.261+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,260 INFO mapred.MapTask: Finished spill 0
+[2025-02-27T20:50:18.278+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,276 INFO mapred.Task: Task:attempt_local1128328515_0001_m_000000_0 is done. And is in the process of committing
+[2025-02-27T20:50:18.283+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,282 INFO mapred.LocalJobRunner: Records R/W=1/1
+[2025-02-27T20:50:18.284+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,282 INFO mapred.Task: Task 'attempt_local1128328515_0001_m_000000_0' done.
+[2025-02-27T20:50:18.299+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,296 INFO mapred.Task: Final Counters for attempt_local1128328515_0001_m_000000_0: Counters: 23
+[2025-02-27T20:50:18.300+0000] {subprocess.py:93} INFO - 	File System Counters
+[2025-02-27T20:50:18.301+0000] {subprocess.py:93} INFO - 		FILE: Number of bytes read=176794
+[2025-02-27T20:50:18.301+0000] {subprocess.py:93} INFO - 		FILE: Number of bytes written=710912
+[2025-02-27T20:50:18.302+0000] {subprocess.py:93} INFO - 		FILE: Number of read operations=0
+[2025-02-27T20:50:18.302+0000] {subprocess.py:93} INFO - 		FILE: Number of large read operations=0
+[2025-02-27T20:50:18.303+0000] {subprocess.py:93} INFO - 		FILE: Number of write operations=0
+[2025-02-27T20:50:18.303+0000] {subprocess.py:93} INFO - 		HDFS: Number of bytes read=85156
+[2025-02-27T20:50:18.304+0000] {subprocess.py:93} INFO - 		HDFS: Number of bytes written=0
+[2025-02-27T20:50:18.305+0000] {subprocess.py:93} INFO - 		HDFS: Number of read operations=5
+[2025-02-27T20:50:18.307+0000] {subprocess.py:93} INFO - 		HDFS: Number of large read operations=0
+[2025-02-27T20:50:18.308+0000] {subprocess.py:93} INFO - 		HDFS: Number of write operations=1
+[2025-02-27T20:50:18.310+0000] {subprocess.py:93} INFO - 		HDFS: Number of bytes read erasure-coded=0
+[2025-02-27T20:50:18.312+0000] {subprocess.py:93} INFO - 	Map-Reduce Framework
+[2025-02-27T20:50:18.312+0000] {subprocess.py:93} INFO - 		Map input records=1
+[2025-02-27T20:50:18.313+0000] {subprocess.py:93} INFO - 		Map output records=100
+[2025-02-27T20:50:18.315+0000] {subprocess.py:93} INFO - 		Map output bytes=4755
+[2025-02-27T20:50:18.317+0000] {subprocess.py:93} INFO - 		Map output materialized bytes=4961
+[2025-02-27T20:50:18.317+0000] {subprocess.py:93} INFO - 		Input split bytes=138
+[2025-02-27T20:50:18.318+0000] {subprocess.py:93} INFO - 		Combine input records=0
+[2025-02-27T20:50:18.318+0000] {subprocess.py:93} INFO - 		Spilled Records=100
+[2025-02-27T20:50:18.318+0000] {subprocess.py:93} INFO - 		Failed Shuffles=0
+[2025-02-27T20:50:18.319+0000] {subprocess.py:93} INFO - 		Merged Map outputs=0
+[2025-02-27T20:50:18.319+0000] {subprocess.py:93} INFO - 		GC time elapsed (ms)=0
+[2025-02-27T20:50:18.321+0000] {subprocess.py:93} INFO - 		Total committed heap usage (bytes)=263192576
+[2025-02-27T20:50:18.323+0000] {subprocess.py:93} INFO - 	File Input Format Counters
+[2025-02-27T20:50:18.324+0000] {subprocess.py:93} INFO - 		Bytes Read=85156
+[2025-02-27T20:50:18.325+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,297 INFO mapred.LocalJobRunner: Finishing task: attempt_local1128328515_0001_m_000000_0
+[2025-02-27T20:50:18.326+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,300 INFO mapred.LocalJobRunner: map task executor complete.
+[2025-02-27T20:50:18.327+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,307 INFO mapred.LocalJobRunner: Waiting for reduce tasks
+[2025-02-27T20:50:18.328+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,308 INFO mapred.LocalJobRunner: Starting task: attempt_local1128328515_0001_r_000000_0
+[2025-02-27T20:50:18.358+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,334 INFO output.FileOutputCommitter: File Output Committer Algorithm version is 2
+[2025-02-27T20:50:18.359+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,334 INFO output.FileOutputCommitter: FileOutputCommitter skip cleanup _temporary folders under output directory:false, ignore cleanup failures: false
+[2025-02-27T20:50:18.360+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,335 INFO mapred.Task:  Using ResourceCalculatorProcessTree : [ ]
+[2025-02-27T20:50:18.382+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,356 INFO mapred.ReduceTask: Using ShuffleConsumerPlugin: org.apache.hadoop.mapreduce.task.reduce.Shuffle@489a686d
+[2025-02-27T20:50:18.385+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,367 WARN impl.MetricsSystemImpl: JobTracker metrics system already initialized!
+[2025-02-27T20:50:18.448+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,447 INFO reduce.MergeManagerImpl: MergerManager: memoryLimit=614727680, maxSingleShuffleLimit=153681920, mergeThreshold=405720288, ioSortFactor=10, memToMemMergeOutputsThreshold=10
+[2025-02-27T20:50:18.450+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,450 INFO reduce.EventFetcher: attempt_local1128328515_0001_r_000000_0 Thread started: EventFetcher for fetching Map Completion Events
+[2025-02-27T20:50:18.499+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,498 INFO reduce.LocalFetcher: localfetcher#1 about to shuffle output of map attempt_local1128328515_0001_m_000000_0 decomp: 4957 len: 4961 to MEMORY
+[2025-02-27T20:50:18.506+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,503 INFO reduce.InMemoryMapOutput: Read 4957 bytes from map-output for attempt_local1128328515_0001_m_000000_0
+[2025-02-27T20:50:18.512+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,510 INFO reduce.MergeManagerImpl: closeInMemoryFile -> map-output of size: 4957, inMemoryMapOutputs.size() -> 1, commitMemory -> 0, usedMemory ->4957
+[2025-02-27T20:50:18.516+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,516 INFO reduce.EventFetcher: EventFetcher is interrupted.. Returning
+[2025-02-27T20:50:18.535+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,533 INFO mapred.LocalJobRunner: 1 / 1 copied.
+[2025-02-27T20:50:18.540+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,534 INFO reduce.MergeManagerImpl: finalMerge called with 1 in-memory map-outputs and 0 on-disk map-outputs
+[2025-02-27T20:50:18.561+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,557 INFO mapred.Merger: Merging 1 sorted segments
+[2025-02-27T20:50:18.563+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,558 INFO mapred.Merger: Down to the last merge-pass, with 1 segments left of total size: 4950 bytes
+[2025-02-27T20:50:18.569+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,567 INFO reduce.MergeManagerImpl: Merged 1 segments, 4957 bytes to disk to satisfy reduce memory limit
+[2025-02-27T20:50:18.574+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,568 INFO reduce.MergeManagerImpl: Merging 1 files, 4961 bytes from disk
+[2025-02-27T20:50:18.580+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,572 INFO reduce.MergeManagerImpl: Merging 0 segments, 0 bytes from memory into reduce
+[2025-02-27T20:50:18.582+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,573 INFO mapred.Merger: Merging 1 sorted segments
+[2025-02-27T20:50:18.583+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,581 INFO mapred.Merger: Down to the last merge-pass, with 1 segments left of total size: 4950 bytes
+[2025-02-27T20:50:18.585+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,583 INFO mapred.LocalJobRunner: 1 / 1 copied.
+[2025-02-27T20:50:18.597+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,595 INFO streaming.PipeMapRed: PipeMapRed exec [/usr/bin/python3, /tmp/reducer.py]
+[2025-02-27T20:50:18.601+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,600 INFO Configuration.deprecation: mapred.job.tracker is deprecated. Instead, use mapreduce.jobtracker.address
+[2025-02-27T20:50:18.604+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,601 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps
+[2025-02-27T20:50:18.753+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,751 INFO streaming.PipeMapRed: R/W/S=1/0/0 in:NA [rec/s] out:NA [rec/s]
+[2025-02-27T20:50:18.754+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,751 INFO streaming.PipeMapRed: R/W/S=10/0/0 in:NA [rec/s] out:NA [rec/s]
+[2025-02-27T20:50:18.756+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,755 INFO streaming.PipeMapRed: R/W/S=100/0/0 in:NA [rec/s] out:NA [rec/s]
+[2025-02-27T20:50:18.758+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,757 INFO streaming.PipeMapRed: Records R/W=100/1
+[2025-02-27T20:50:18.762+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,760 INFO streaming.PipeMapRed: MRErrorThread done
+[2025-02-27T20:50:18.763+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,761 INFO streaming.PipeMapRed: mapRedFinished
+[2025-02-27T20:50:18.783+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,780 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+[2025-02-27T20:50:18.806+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,805 INFO mapred.Task: Task:attempt_local1128328515_0001_r_000000_0 is done. And is in the process of committing
+[2025-02-27T20:50:18.810+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,810 INFO mapred.LocalJobRunner: 1 / 1 copied.
+[2025-02-27T20:50:18.813+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,810 INFO mapred.Task: Task attempt_local1128328515_0001_r_000000_0 is allowed to commit now
+[2025-02-27T20:50:18.817+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,816 INFO mapreduce.Job: Job job_local1128328515_0001 running in uber mode : false
+[2025-02-27T20:50:18.819+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,817 INFO mapreduce.Job:  map 100% reduce 0%
+[2025-02-27T20:50:18.831+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,830 INFO output.FileOutputCommitter: Saved output of task 'attempt_local1128328515_0001_r_000000_0' to hdfs://namenode:9000/user/etudiant/crypto/processed/YYYY=2025/MM=02/DD=27
+[2025-02-27T20:50:18.832+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,831 INFO mapred.LocalJobRunner: Records R/W=100/1 > reduce
+[2025-02-27T20:50:18.833+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,832 INFO mapred.Task: Task 'attempt_local1128328515_0001_r_000000_0' done.
+[2025-02-27T20:50:18.834+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,833 INFO mapred.Task: Final Counters for attempt_local1128328515_0001_r_000000_0: Counters: 30
+[2025-02-27T20:50:18.834+0000] {subprocess.py:93} INFO - 	File System Counters
+[2025-02-27T20:50:18.834+0000] {subprocess.py:93} INFO - 		FILE: Number of bytes read=186748
+[2025-02-27T20:50:18.835+0000] {subprocess.py:93} INFO - 		FILE: Number of bytes written=715873
+[2025-02-27T20:50:18.835+0000] {subprocess.py:93} INFO - 		FILE: Number of read operations=0
+[2025-02-27T20:50:18.835+0000] {subprocess.py:93} INFO - 		FILE: Number of large read operations=0
+[2025-02-27T20:50:18.835+0000] {subprocess.py:93} INFO - 		FILE: Number of write operations=0
+[2025-02-27T20:50:18.835+0000] {subprocess.py:93} INFO - 		HDFS: Number of bytes read=85156
+[2025-02-27T20:50:18.836+0000] {subprocess.py:93} INFO - 		HDFS: Number of bytes written=5062
+[2025-02-27T20:50:18.836+0000] {subprocess.py:93} INFO - 		HDFS: Number of read operations=10
+[2025-02-27T20:50:18.836+0000] {subprocess.py:93} INFO - 		HDFS: Number of large read operations=0
+[2025-02-27T20:50:18.836+0000] {subprocess.py:93} INFO - 		HDFS: Number of write operations=3
+[2025-02-27T20:50:18.836+0000] {subprocess.py:93} INFO - 		HDFS: Number of bytes read erasure-coded=0
+[2025-02-27T20:50:18.837+0000] {subprocess.py:93} INFO - 	Map-Reduce Framework
+[2025-02-27T20:50:18.837+0000] {subprocess.py:93} INFO - 		Combine input records=0
+[2025-02-27T20:50:18.837+0000] {subprocess.py:93} INFO - 		Combine output records=0
+[2025-02-27T20:50:18.837+0000] {subprocess.py:93} INFO - 		Reduce input groups=100
+[2025-02-27T20:50:18.838+0000] {subprocess.py:93} INFO - 		Reduce shuffle bytes=4961
+[2025-02-27T20:50:18.838+0000] {subprocess.py:93} INFO - 		Reduce input records=100
+[2025-02-27T20:50:18.839+0000] {subprocess.py:93} INFO - 		Reduce output records=100
+[2025-02-27T20:50:18.839+0000] {subprocess.py:93} INFO - 		Spilled Records=100
+[2025-02-27T20:50:18.839+0000] {subprocess.py:93} INFO - 		Shuffled Maps =1
+[2025-02-27T20:50:18.840+0000] {subprocess.py:93} INFO - 		Failed Shuffles=0
+[2025-02-27T20:50:18.840+0000] {subprocess.py:93} INFO - 		Merged Map outputs=1
+[2025-02-27T20:50:18.840+0000] {subprocess.py:93} INFO - 		GC time elapsed (ms)=15
+[2025-02-27T20:50:18.840+0000] {subprocess.py:93} INFO - 		Total committed heap usage (bytes)=263192576
+[2025-02-27T20:50:18.840+0000] {subprocess.py:93} INFO - 	Shuffle Errors
+[2025-02-27T20:50:18.841+0000] {subprocess.py:93} INFO - 		BAD_ID=0
+[2025-02-27T20:50:18.841+0000] {subprocess.py:93} INFO - 		CONNECTION=0
+[2025-02-27T20:50:18.841+0000] {subprocess.py:93} INFO - 		IO_ERROR=0
+[2025-02-27T20:50:18.841+0000] {subprocess.py:93} INFO - 		WRONG_LENGTH=0
+[2025-02-27T20:50:18.841+0000] {subprocess.py:93} INFO - 		WRONG_MAP=0
+[2025-02-27T20:50:18.842+0000] {subprocess.py:93} INFO - 		WRONG_REDUCE=0
+[2025-02-27T20:50:18.842+0000] {subprocess.py:93} INFO - 	File Output Format Counters
+[2025-02-27T20:50:18.842+0000] {subprocess.py:93} INFO - 		Bytes Written=5062
+[2025-02-27T20:50:18.842+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,833 INFO mapred.LocalJobRunner: Finishing task: attempt_local1128328515_0001_r_000000_0
+[2025-02-27T20:50:18.842+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:18,833 INFO mapred.LocalJobRunner: reduce task executor complete.
+[2025-02-27T20:50:19.820+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:19,819 INFO mapreduce.Job:  map 100% reduce 100%
+[2025-02-27T20:50:19.823+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:19,819 INFO mapreduce.Job: Job job_local1128328515_0001 completed successfully
+[2025-02-27T20:50:19.827+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:19,826 INFO mapreduce.Job: Counters: 36
+[2025-02-27T20:50:19.828+0000] {subprocess.py:93} INFO - 	File System Counters
+[2025-02-27T20:50:19.828+0000] {subprocess.py:93} INFO - 		FILE: Number of bytes read=363542
+[2025-02-27T20:50:19.829+0000] {subprocess.py:93} INFO - 		FILE: Number of bytes written=1426785
+[2025-02-27T20:50:19.829+0000] {subprocess.py:93} INFO - 		FILE: Number of read operations=0
+[2025-02-27T20:50:19.829+0000] {subprocess.py:93} INFO - 		FILE: Number of large read operations=0
+[2025-02-27T20:50:19.830+0000] {subprocess.py:93} INFO - 		FILE: Number of write operations=0
+[2025-02-27T20:50:19.830+0000] {subprocess.py:93} INFO - 		HDFS: Number of bytes read=170312
+[2025-02-27T20:50:19.830+0000] {subprocess.py:93} INFO - 		HDFS: Number of bytes written=5062
+[2025-02-27T20:50:19.830+0000] {subprocess.py:93} INFO - 		HDFS: Number of read operations=15
+[2025-02-27T20:50:19.830+0000] {subprocess.py:93} INFO - 		HDFS: Number of large read operations=0
+[2025-02-27T20:50:19.831+0000] {subprocess.py:93} INFO - 		HDFS: Number of write operations=4
+[2025-02-27T20:50:19.831+0000] {subprocess.py:93} INFO - 		HDFS: Number of bytes read erasure-coded=0
+[2025-02-27T20:50:19.831+0000] {subprocess.py:93} INFO - 	Map-Reduce Framework
+[2025-02-27T20:50:19.831+0000] {subprocess.py:93} INFO - 		Map input records=1
+[2025-02-27T20:50:19.831+0000] {subprocess.py:93} INFO - 		Map output records=100
+[2025-02-27T20:50:19.831+0000] {subprocess.py:93} INFO - 		Map output bytes=4755
+[2025-02-27T20:50:19.831+0000] {subprocess.py:93} INFO - 		Map output materialized bytes=4961
+[2025-02-27T20:50:19.832+0000] {subprocess.py:93} INFO - 		Input split bytes=138
+[2025-02-27T20:50:19.832+0000] {subprocess.py:93} INFO - 		Combine input records=0
+[2025-02-27T20:50:19.832+0000] {subprocess.py:93} INFO - 		Combine output records=0
+[2025-02-27T20:50:19.832+0000] {subprocess.py:93} INFO - 		Reduce input groups=100
+[2025-02-27T20:50:19.832+0000] {subprocess.py:93} INFO - 		Reduce shuffle bytes=4961
+[2025-02-27T20:50:19.833+0000] {subprocess.py:93} INFO - 		Reduce input records=100
+[2025-02-27T20:50:19.833+0000] {subprocess.py:93} INFO - 		Reduce output records=100
+[2025-02-27T20:50:19.833+0000] {subprocess.py:93} INFO - 		Spilled Records=200
+[2025-02-27T20:50:19.833+0000] {subprocess.py:93} INFO - 		Shuffled Maps =1
+[2025-02-27T20:50:19.833+0000] {subprocess.py:93} INFO - 		Failed Shuffles=0
+[2025-02-27T20:50:19.833+0000] {subprocess.py:93} INFO - 		Merged Map outputs=1
+[2025-02-27T20:50:19.833+0000] {subprocess.py:93} INFO - 		GC time elapsed (ms)=15
+[2025-02-27T20:50:19.834+0000] {subprocess.py:93} INFO - 		Total committed heap usage (bytes)=526385152
+[2025-02-27T20:50:19.834+0000] {subprocess.py:93} INFO - 	Shuffle Errors
+[2025-02-27T20:50:19.834+0000] {subprocess.py:93} INFO - 		BAD_ID=0
+[2025-02-27T20:50:19.834+0000] {subprocess.py:93} INFO - 		CONNECTION=0
+[2025-02-27T20:50:19.834+0000] {subprocess.py:93} INFO - 		IO_ERROR=0
+[2025-02-27T20:50:19.834+0000] {subprocess.py:93} INFO - 		WRONG_LENGTH=0
+[2025-02-27T20:50:19.834+0000] {subprocess.py:93} INFO - 		WRONG_MAP=0
+[2025-02-27T20:50:19.835+0000] {subprocess.py:93} INFO - 		WRONG_REDUCE=0
+[2025-02-27T20:50:19.835+0000] {subprocess.py:93} INFO - 	File Input Format Counters
+[2025-02-27T20:50:19.836+0000] {subprocess.py:93} INFO - 		Bytes Read=85156
+[2025-02-27T20:50:19.836+0000] {subprocess.py:93} INFO - 	File Output Format Counters
+[2025-02-27T20:50:19.837+0000] {subprocess.py:93} INFO - 		Bytes Written=5062
+[2025-02-27T20:50:19.837+0000] {subprocess.py:93} INFO - 2025-02-27 20:50:19,826 INFO streaming.StreamJob: Output directory: /user/etudiant/crypto/processed/YYYY=2025/MM=02/DD=27
+[2025-02-27T20:50:21.727+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-02-27T20:50:21.753+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=coingecko_ingestion_dag, task_id=run_mapreduce_job, execution_date=20250227T205001, start_date=20250227T205011, end_date=20250227T205021
+[2025-02-27T20:50:21.787+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-27T20:50:21.804+0000] {taskinstance.py:2784} INFO - 1 downstream tasks scheduled from follow-on schedule check
